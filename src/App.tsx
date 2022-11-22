@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+// import logo from './logo.svg';
 import './App.css';
+import Seaport from "./Seaport";
+import {
+    EthereumClient,
+    modalConnectors,
+    walletConnectProvider,
+} from "@web3modal/ethereum";
+
+import { Web3Modal } from "@web3modal/react";
+import { Web3Button } from "@web3modal/react";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 
 function App() {
+    const projectId = process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID || ''
+    const   chains = [chain.goerli];
+
+    const { provider } = configureChains(chains, [
+        walletConnectProvider({ projectId: projectId }),
+    ]);
+    const wagmiClient = createClient({
+        autoConnect: true,
+        connectors: modalConnectors({ appName: "web3Modal", chains }),
+        provider,
+    });
+    const ethereumClient = new EthereumClient(wagmiClient, chains);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <>
+            <WagmiConfig client={wagmiClient}>
+                <Web3Button/>
+            </WagmiConfig>
+            <Seaport projectId={projectId}/>
+            <Web3Modal
+                projectId={projectId}
+                theme="dark"
+                accentColor="default"
+                ethereumClient={ethereumClient}
+            />
+        </>
     </div>
   );
 }
