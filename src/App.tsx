@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Seaport from "./Seaport";
 import {
     EthereumClient,
     modalConnectors,
@@ -11,6 +10,7 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { Web3Button } from "@web3modal/react";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import Seaport from "./Seaport";
 
 function App() {
     const projectId = process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID || ''

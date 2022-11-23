@@ -1,26 +1,27 @@
 import React, {useState} from 'react';
 import {Network, OpenSeaSDK} from "opensea-js";
 // import Web3 from 'web3';
-// import detectEthereumProvider from '@metamask/detect-provider';
 import { useAccount } from 'wagmi';
-import UniversalProvider from "@walletconnect/universal-provider";
+// import UniversalProvider from "@walletconnect/universal-provider";
+import {useProvider} from 'wagmi'
+import {providers} from "ethers";
 
 
 function Seaport(params: {projectId: string}) {
     const { address, connector, isConnected } = useAccount()
-    const [ethereumProvider, setEthereumProvider] = useState<UniversalProvider>();
-
+    const [ethereumProvider, setEthereumProvider] = useState();
+    const provider = useProvider()
     if(isConnected) {
         const createProvider = async () => {
-            const provider = await UniversalProvider.init({
-                projectId: params.projectId,
-                logger: 'debug',
-                relayUrl: 'https://walletconnect.com/',
-            });
             console.log('UniversalProvider: ', provider)
+            console.log('UniversalProvider2: ', window.ethereum)
 
-            setEthereumProvider(provider);
-            const openseaSDK = new OpenSeaSDK(provider)
+            // setEthereumProvider(provider);
+            // @ts-ignore
+            const openseaSDK = new OpenSeaSDK(window.ethereum)
+            // const web3 = new providers.Web3Provider(provider)
+            // const web3 = new providers.Web3Provider(window.ethereum)
+            // console.log(await web3.listAccounts())
         }
 
         return (
