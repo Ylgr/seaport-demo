@@ -10,7 +10,7 @@ import {
 import { Web3Modal } from "@web3modal/react";
 import { Web3Button } from "@web3modal/react";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import Seaport from "./Seaport";
+import SeaportDemo from "./SeaportDemo";
 
 function App() {
     const projectId = process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID || ''
@@ -32,7 +32,7 @@ function App() {
             <WagmiConfig client={wagmiClient}>
                 <Web3Button/>
             </WagmiConfig>
-            <Seaport projectId={projectId}/>
+            <SeaportDemo projectId={projectId}/>
             <Web3Modal
                 projectId={projectId}
                 theme="dark"
