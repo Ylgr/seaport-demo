@@ -31,7 +31,8 @@ function SeaportDemo(params: {projectId: string}) {
                             offer: [
                                 {
                                     itemType: ItemType.ERC721,
-                                    token: "0x4977dFeDaC2886af3BDEb85AE20E5D0eDe17909D",
+                                    token: "0x3A1d177cD56dE031CEfCb0E4357666D96fD7ccf0",
+                                    // token: "0x4977dFeDaC2886af3BDEb85AE20E5D0eDe17909D",
                                     identifier: "1",
                                 },
                             ],
@@ -39,7 +40,8 @@ function SeaportDemo(params: {projectId: string}) {
                                 {
                                     amount: parseEther("10").toString(),
                                     // ERC20
-                                    token: "0x43ea565d44E0BF3af9Fe3f1F68655a383C13646D",
+                                    // token: "0x43ea565d44E0BF3af9Fe3f1F68655a383C13646D",
+                                    token: "0x4977dFeDaC2886af3BDEb85AE20E5D0eDe17909D",
                                     recipient: offerer,
                                 },
                             ],
@@ -60,6 +62,17 @@ function SeaportDemo(params: {projectId: string}) {
                     const transaction = executeAllFulfillActions();
                     console.log('transaction: ', transaction)
                 }}>Fullfil order</button>
+                <br/>
+                <label>Shipyard (currently only work on ethereum mainnet): </label>
+                <button onClick={async () => {
+                    {
+                        const { transact } = await seaport.setDomain('Broken moon')
+                        console.log(await (await transact()).wait())
+                    }}}>Set domain</button>
+                <button onClick={async () => {}}>Get domain</button>
+                <br/>
+                <label>Seadrop</label>
+
             </>
             )
 
