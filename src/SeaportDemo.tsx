@@ -6,12 +6,15 @@ import { ethers } from "ethers";
 import {parseEther} from "ethers/lib/utils";
 import {ItemType} from "@opensea/seaport-js/lib/constants";
 import {OrderWithCounter} from "@opensea/seaport-js/lib/types";
+import Seadrop from "./abi/Seadrop.json"
 
 function SeaportDemo(params: {projectId: string}) {
     const { address, connector, isConnected } = useAccount()
     const [order, setOrder] = useState<OrderWithCounter>();
     // @ts-ignore
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const seadrop = new ethers.Contract('0x00005EA00Ac477B1030CE78506496e8C2dE24bf5', Seadrop, signer)
     const seaport = new Seaport(provider);
     if(isConnected) {
         const logSomething = async () => {
@@ -71,8 +74,11 @@ function SeaportDemo(params: {projectId: string}) {
                     }}}>Set domain</button>
                 <button onClick={async () => {}}>Get domain</button>
                 <br/>
-                <label>Seadrop</label>
-
+                <label>Seadrop: </label>
+                <button onClick={async () => {
+                    await seadrop.mintPublic('0x2ab4Cd18057C7a3df47902cD5F28E628A00f17E0', '0xDb5bFab9fC8D9c3F4c6fd12D686E3Fadb14F6A62', '0x0000000000000000000000000000000000000000', 3,
+                        {value: parseEther('0.0003').toString()})
+                }}>Mint</button>
             </>
             )
 
