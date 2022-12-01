@@ -26,6 +26,14 @@ function SeaportDemo(params: {projectId: string}) {
             <>
                 <button onClick={() => logSomething()}>Log something</button>
                 <br/>
+                <h1>----------------------------------------------</h1>
+                <br/>
+                <label>Seaport</label>
+                <br/>
+                <button onClick={async () => {
+
+                }} disabled>Get order (Open sea still not support public backend for seaport)</button>
+                <br/>
                 <label>Basic case: </label>
                 <button onClick={async () => {
                     const offerer = (await provider.listAccounts())[0]
@@ -64,7 +72,33 @@ function SeaportDemo(params: {projectId: string}) {
                         });
                     const transaction = executeAllFulfillActions();
                     console.log('transaction: ', transaction)
-                }}>Fullfil order</button>
+                }}>Fulfill order</button>
+                <button onClick={async () => {
+                    if(order) {
+                        const { transact } = seaport.cancelOrders([order.parameters])
+                        console.log(await (await transact()).wait())
+                    } else {
+                        alert('Not have any order!')
+                    }
+                }}>Cancel order</button>
+                <br/>
+                <label>Current order: </label>
+                {order? <>
+                    <p><b>Offerer:</b> {order.parameters.offerer} - <b>Token:</b> {order.parameters.offer[0].token} - <b>IdentifierOrCriteria:</b> {order.parameters.offer[0].identifierOrCriteria} - <b>Start amount:</b> {order.parameters.offer[0].startAmount} - <b>End amount:</b> {order.parameters.offer[0].endAmount}</p>
+                    <p><b>Consideration</b> - <b>Token:</b> {order.parameters.consideration[0].token} - <b>IdentifierOrCriteria: </b> {order.parameters.consideration[0].identifierOrCriteria} - <b>Start amount:</b> {order.parameters.consideration[0].startAmount} - <b>End amount:</b> {order.parameters.consideration[0].endAmount}</p>
+                </>: ''}
+                <br/>
+                <label>Get info: </label>
+                <button onClick={async () => {
+                    console.log(await seaport.getCounter((await provider.listAccounts())[0]))
+                }}>Get counter</button>
+                <button onClick={async () => {
+                    if(order) {
+                        console.log(await seaport.getOrderStatus(seaport.getOrderHash(order.parameters)))
+                    }
+                }}>Get order status</button>
+                <br/>
+                <h1>----------------------------------------------</h1>
                 <br/>
                 <label>Shipyard (currently only work on ethereum mainnet): </label>
                 <button onClick={async () => {
@@ -73,6 +107,8 @@ function SeaportDemo(params: {projectId: string}) {
                         console.log(await (await transact()).wait())
                     }}}>Set domain</button>
                 <button onClick={async () => {}}>Get domain</button>
+                <br/>
+                <h1>----------------------------------------------</h1>
                 <br/>
                 <label>Seadrop: </label>
                 <button onClick={async () => {
