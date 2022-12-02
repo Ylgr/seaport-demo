@@ -112,8 +112,9 @@ function SeaportDemo(params: {projectId: string}) {
                 <br/>
                 <label>Seadrop: </label>
                 <button onClick={async () => {
-                    await seadrop.mintPublic('0x2ab4Cd18057C7a3df47902cD5F28E628A00f17E0', '0xDb5bFab9fC8D9c3F4c6fd12D686E3Fadb14F6A62', '0x0000000000000000000000000000000000000000', 3,
-                        {value: parseEther('0.0003').toString()})
+                    await seadrop.mintPublic('0x2ab4Cd18057C7a3df47902cD5F28E628A00f17E0', '0xDb5bFab9fC8D9c3F4c6fd12D686E3Fadb14F6A62', '0x0000000000000000000000000000000000000000', 1
+                        , {value: parseEther('0.0001').toString()}
+                    )
                 }}>Mint</button>
             </>
             )
