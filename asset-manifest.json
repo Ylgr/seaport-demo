@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/seaport-demo/static/css/main.ba17183d.css",
+    "main.js": "/seaport-demo/static/js/main.7694f056.js",
+    "static/js/764.96c39b6e.chunk.js": "/seaport-demo/static/js/764.96c39b6e.chunk.js",
+    "static/js/563.e04bafd1.chunk.js": "/seaport-demo/static/js/563.e04bafd1.chunk.js",
+    "static/js/27.e4d0ba30.chunk.js": "/seaport-demo/static/js/27.e4d0ba30.chunk.js",
+    "static/js/779.b81afdf3.chunk.js": "/seaport-demo/static/js/779.b81afdf3.chunk.js",
+    "static/js/836.022cfb7c.chunk.js": "/seaport-demo/static/js/836.022cfb7c.chunk.js",
+    "static/js/498.72d3187c.chunk.js": "/seaport-demo/static/js/498.72d3187c.chunk.js",
+    "index.html": "/seaport-demo/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.ba17183d.css",
+    "static/js/main.7694f056.js"
+  ]
+}
